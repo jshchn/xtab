@@ -18,6 +18,11 @@ function _getAlgo() {
     return localStorage.algo || 'used';
 }
 
+function _getAlgo2() {
+    return localStorage.algo2;
+}
+
+
 function _markActive(tabId) {
     _debug('marked active', tabId);
     usedOn[tabId] = new Date().getTime();
@@ -35,8 +40,8 @@ function _handleTabActivated(data) {
     // this is so if you are quickly switching tabs
     // they are not considered active
     timeout = setTimeout(function() {
-        _markActive(tabId);
-    }, activeInterval);
+        _markActive(tabId)
+;    }, activeInterval);
 }
 
 function _handleTabRemoved(tabId) {
@@ -46,6 +51,13 @@ function _handleTabRemoved(tabId) {
     delete usedOn[tabId];
     delete openedOn[tabId];
     delete accessed[tabId];
+
+    // If this is set to keep; reopen the tabs
+    if ( _getAlgo2() === 'keep') {
+        chrome.tabs.create({ url: "about:blank, active:false"});
+
+        return;
+    }
 }
 
 function _handleTabReplaced(newTabId, oldTabId) {
@@ -157,6 +169,7 @@ function _removeTabs(tabs) {
 
 function _handleTabAdded(data) {
     var tabId = data.id || data;
+    var index = data.index || index;
 
     _debug('added', tabId);
 

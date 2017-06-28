@@ -18,9 +18,11 @@
     <input type="number" name="max" id="input-max"{% if (!hasMatch) %} style="display: block;" value="{{ max }}"{% end %}>
 
     <h2>Close existing tab:</h2>
-    <label><input type="radio" name="algo" value="used"{% if (algo == 'used') %} checked{% end %}>Least recently used</label>
-    <label><input type="radio" name="algo" value="accessed"{% if (algo == 'accessed') %} checked{% end %}>Least accessed</label>
-    <label><input type="radio" name="algo" value="oldest"{% if (algo == 'oldest') %} checked{% end %}>Oldest</label>
+    <label><input type="radio" name="algo" id="algo" value="used"{% if (algo == 'used') %} checked{% end %}>Least recently used</label>
+    <label><input type="radio" name="algo" id="algo" value="accessed"{% if (algo == 'accessed') %} checked{% end %}>Least accessed</label>
+    <label><input type="radio" name="algo" id="algo" value="oldest"{% if (algo == 'oldest') %} checked{% end %}>Oldest</label>
     <h2>Block new tab:</h2>
-    <label><input type="radio" name="algo" value="block"{% if (algo == 'block') %} checked{% end %}>Block new tabs from opening</label>
+    <label><input type="radio" name="algo" id="algo" value="block"{% if (algo == 'block') %} checked{% end %}>Block new tabs from opening</label>
+    <h2>Keep Tabs Opened:</h2>
+    <label><input type="checkbox" name="algo2" id="algo2" value="keep"{% if (algo2 == 'keep') %} checked{% end %}>Set the current number of tabs as min</label>
 </form>
