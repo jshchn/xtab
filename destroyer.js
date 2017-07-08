@@ -53,8 +53,10 @@ function _handleTabRemoved(tabId) {
     delete accessed[tabId];
 
     // If this is set to keep; reopen the tabs
-    if ( _getAlgo2() === 'keep') {
+    if ( _getAlgo2() === 'keep' && length < _getMax() - 1) {
+        chrome.tabs.onCreated.removeListener(_handleTabAdded)
         chrome.tabs.create({ url: "about:blank, active:false"});
+        chrome.tabs.onCreated.addListener(_handleTabAdded)
 
         return;
     }
